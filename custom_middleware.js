@@ -1,18 +1,22 @@
-const express=require("express");
-const app=express();
-function checkStudent(req,res,next){
-    const student=true;
-    if(student){
+const express = require("express");
+const app = express();
+const port=5000;
+function checkTicket(req, res, next) {
+    const hasTicket = true;
+
+    if (hasTicket) {
         next();
-    }
-    else{
-        res.send("Access Denied");
+    } else {
+        res.send("Sorry, you need a ticket!");
     }
 }
-app.use(checkStudent);
-app.get("/student",(req,res)=>{
-    res.send("Welcome student!");
+
+app.use(checkTicket);
+
+app.get("/movie", (req, res) => {
+    res.send("Enjoy the movie!");
 });
-app.listen(3000,()=>{
-    console.log("Server running at http://localhost:3000");
+
+app.listen(port, () => {
+    console.log(`Server running on port http://localhost:${port}`);
 });
